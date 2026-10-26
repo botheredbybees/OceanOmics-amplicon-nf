@@ -121,7 +121,9 @@ def main():
                 )
             ):
                 # read line to the 'll' list
-                ll = line.strip().split("\t")
+                # drop the domain field (column 0) only: strip() would also delete the empty phylum field of lineages
+                # without an NCBI phylum rank (most protists), shifting every later column
+                ll = line.rstrip("\n").split("\t")[1:]
                 acc_total.append(ll[:])
 
                 # for the first line add value of the 'll' to the 'acc' list
